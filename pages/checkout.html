@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout – ArtMagma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/base.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/produtos.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+  <style>
+    .hidden { display: none !important; }
+
+    .empty-cart {
+      text-align: center;
+      padding: 80px var(--gap-xl);
+      color: var(--color-muted);
+    }
+    .empty-cart i { font-size: 4rem; color: var(--color-border); display: block; margin-bottom: 20px; }
+    .empty-cart h2 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: var(--gap-sm);
+    }
+
+    /* Seção de pagamento (pronta para integração futura) */
+    .payment-section {
+      background: var(--color-card);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-md);
+      margin-top: var(--gap-md);
+      border: 1px dashed var(--color-border);
+    }
+    .payment-section h3 {
+      font-family: var(--font-heading);
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-orange);
+      margin-bottom: var(--gap-sm);
+    }
+
+    /* Métodos de pagamento */
+    .payment-methods {
+      display: flex;
+      gap: var(--gap-xs);
+      margin-bottom: var(--gap-md);
+      flex-wrap: wrap;
+    }
+    .payment-method {
+      flex: 1;
+      min-width: 100px;
+      padding: 10px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color var(--transition);
+      font-family: var(--font-heading);
+      font-size: .7rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+    .payment-method i { display: block; font-size: 1.4rem; margin-bottom: 4px; color: var(--color-muted); }
+    .payment-method.selected { border-color: var(--color-orange); color: #fff; }
+    .payment-method.selected i { color: var(--color-orange); }
+
+    .integration-note {
+      font-size: .78rem;
+      color: var(--color-muted);
+      font-style: italic;
+      text-align: center;
+      padding: var(--gap-sm);
+      border: 1px dashed #4a2010;
+      border-radius: var(--radius-sm);
+      line-height: 1.6;
+    }
+    .integration-note strong { color: var(--color-orange); font-style: normal; }
+  </style>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <div class="page-hero">
+    <h1>Meu <span>Carrinho</span></h1>
+    <p>Revise seus itens antes de finalizar</p>
+  </div>
+
+  <!-- Steps -->
+  <div style="padding: var(--gap-md) var(--gap-xl) 0;">
+    <div class="checkout-steps">
+      <div class="step active"><i class="fas fa-cart-shopping"></i> Carrinho</div>
+      <div class="step"><i class="fas fa-truck"></i> Entrega</div>
+      <div class="step"><i class="fas fa-credit-card"></i> Pagamento</div>
+      <div class="step"><i class="fas fa-check"></i> Confirmação</div>
+    </div>
+  </div>
+
+  <!-- CARRINHO VAZIO -->
+  <div id="cartEmpty" class="hidden empty-cart">
+    <i class="fas fa-cart-shopping"></i>
+    <h2>Seu carrinho está vazio</h2>
+    <p style="margin-bottom:24px;">Adicione produtos para continuar.</p>
+    <a href="produtos.html" class="btn"><i class="fas fa-store"></i> Ver Produtos</a>
+  </div>
+
+  <!-- LAYOUT DO CHECKOUT -->
+  <div class="checkout-layout" id="checkoutFormSection">
+
+    <!-- FORMULÁRIO DE ENTREGA -->
+    <div class="checkout-form">
+      <h2><i class="fas fa-truck"></i> Dados de Entrega</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" class="form-control" placeholder="Seu nome completo"/>
+        </div>
+        <div class="form-group">
+          <label>CPF</label>
+          <input type="text" class="form-control" placeholder="000.000.000-00"/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" class="form-control" placeholder="seu@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>Telefone</label>
+          <input type="tel" class="form-control" placeholder="(00) 00000-0000"/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>CEP</label>
+          <input type="text" class="form-control" placeholder="00000-000" id="cepInput"/>
+        </div>
+        <div class="form-group" style="align-self:end;">
+          <button class="btn" id="cepBtn" style="width:100%;justify-content:center;">
+            <i class="fas fa-magnifying-glass"></i> Buscar CEP
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Endereço</label>
+        <input type="text" class="form-control" placeholder="Rua, Av..." id="enderecoInput"/>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Número</label>
+          <input type="text" class="form-control" placeholder="Nº"/>
+        </div>
+        <div class="form-group">
+          <label>Complemento</label>
+          <input type="text" class="form-control" placeholder="Apto, Bloco..."/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Bairro</label>
+          <input type="text" class="form-control" placeholder="Bairro" id="bairroInput"/>
+        </div>
+        <div class="form-group">
+          <label>Cidade / UF</label>
+          <input type="text" class="form-control" placeholder="Cidade – UF" id="cidadeInput"/>
+        </div>
+      </div>
+
+      <!-- PAGAMENTO (placeholder para integração futura) -->
+      <div class="payment-section" style="margin-top:var(--gap-md);">
+        <h3><i class="fas fa-credit-card"></i> Forma de Pagamento</h3>
+
+        <div class="payment-methods">
+          <div class="payment-method selected" data-method="pix">
+            <i class="fas fa-qrcode"></i>Pix
+          </div>
+          <div class="payment-method" data-method="cartao">
+            <i class="fas fa-credit-card"></i>Cartão
+          </div>
+          <div class="payment-method" data-method="boleto">
+            <i class="fas fa-barcode"></i>Boleto
+          </div>
+        </div>
+
+        <div class="integration-note">
+          <strong>🔧 Integração de Pagamento</strong><br>
+          Este bloco está pronto para receber o SDK do seu gateway.<br>
+          Sugestões: <strong>Stripe</strong>, <strong>PagSeguro</strong>, <strong>Mercado Pago</strong>, <strong>Pagar.me</strong>.
+        </div>
+      </div>
+
+      <button class="btn" style="width:100%;justify-content:center;margin-top:var(--gap-md);font-size:.9rem;padding:16px;" id="finalizarBtn">
+        <i class="fas fa-lock"></i> Finalizar Pedido
+      </button>
+    </div>
+
+    <!-- RESUMO DO PEDIDO -->
+    <div class="checkout-summary">
+      <h2><i class="fas fa-receipt"></i> Resumo do Pedido</h2>
+
+      <div class="cart-items-list" id="cartItemsList"></div>
+
+      <div class="cart-total">
+        <div class="cart-total__row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">R$ 0,00</span>
+        </div>
+        <div class="cart-total__row">
+          <span>Frete</span>
+          <span id="cartFrete">—</span>
+        </div>
+        <div class="cart-total__row cart-total__row--final">
+          <span>Total</span>
+          <span id="cartTotalValue">R$ 0,00</span>
+        </div>
+      </div>
+
+      <p style="font-size:.72rem;color:var(--color-muted);margin-top:10px;line-height:1.5;">
+        <i class="fas fa-shield-halved" style="color:var(--color-orange);"></i>
+        Compra 100% segura. Seus dados são protegidos.
+      </p>
+    </div>
+
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../js/components.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/newsletter.js"></script>
+  <script src="../js/animations.js"></script>
+  <script>
+    /* Seletor de método de pagamento */
+    document.querySelectorAll('.payment-method').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.payment-method').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+
+    /* Busca de CEP via ViaCEP (gratuito, sem chave) */
+    document.getElementById('cepBtn').addEventListener('click', () => {
+      const cep = document.getElementById('cepInput').value.replace(/\D/g, '');
+      if (cep.length !== 8) return;
+
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(r => r.json())
+        .then(d => {
+          if (d.erro) return;
+          document.getElementById('enderecoInput').value = d.logradouro || '';
+          document.getElementById('bairroInput').value   = d.bairro    || '';
+          document.getElementById('cidadeInput').value   = `${d.localidade} – ${d.uf}`;
+        })
+        .catch(() => {});
+    });
+
+    /* Botão finalizar (placeholder) */
+    document.getElementById('finalizarBtn').addEventListener('click', () => {
+      const items = Cart.getAll();
+      if (!items.length) {
+        alert('Seu carrinho está vazio!');
+        return;
+      }
+      alert('✔ Pedido finalizado! (integre seu gateway de pagamento aqui)');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Produto – ArtMagma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/base.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+
+  <style>
+    /* ── Layout principal ── */
+    .produto-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 600px;
+    }
+
+    /* ── Galeria de fotos (esquerda) ── */
+    .galeria {
+      background: #1e0800;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 64px;
+      align-self: start;
+    }
+
+    .galeria__principal {
+      position: relative;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: #2a1000;
+      cursor: zoom-in;
+    }
+
+    .galeria__principal img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .galeria__principal:hover img { transform: scale(1.04); }
+
+    /* Badge de estoque */
+    .galeria__badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--color-orange);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: .7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    .galeria__badge--baixo { background: #c0392b; }
+
+    /* Miniaturas */
+    .galeria__thumbs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .galeria__thumb {
+      flex: 1;
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color var(--transition);
+      background: #2a1000;
+    }
+
+    .galeria__thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .3s;
+    }
+
+    .galeria__thumb:hover img { transform: scale(1.08); }
+    .galeria__thumb.active { border-color: var(--color-orange); }
+
+    /* ── Área de informações (direita) ── */
+    .produto-info {
+      padding: 50px 50px 50px 40px;
+      background: var(--color-bg);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .75rem;
+      color: var(--color-muted);
+    }
+
+    .breadcrumb a { transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--color-orange); }
+    .breadcrumb i { font-size: .6rem; }
+
+    /* Categoria pill */
+    .categoria-pill {
+      display: inline-block;
+      background: var(--color-surface);
+      color: var(--color-orange);
+      font-family: var(--font-heading);
+      font-size: .7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--color-border);
+      width: fit-content;
+    }
+
+    /* Nome */
+    .produto-nome {
+      font-size: 2.4rem;
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+
+    .produto-nome span { color: var(--color-orange); }
+
+    /* Divider */
+    .divider {
+      width: 50px; height: 2px;
+      background: var(--color-orange);
+    }
+
+    /* Preço */
+    .produto-preco {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .produto-preco__valor {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      color: var(--color-orange);
+    }
+
+    .produto-preco__parcelamento {
+      font-size: .82rem;
+      color: var(--color-muted);
+    }
+
+    /* Descrição */
+    .produto-descricao {
+      font-size: .9rem;
+      line-height: 1.8;
+      color: #ccc;
+      max-width: 480px;
+    }
+
+    /* Quantidade + Botão */
+    .produto-acoes {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .qty-control button {
+      width: 40px; height: 48px;
+      background: var(--color-surface);
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+
+    .qty-control button:hover { background: var(--color-orange); }
+
+    .qty-control span {
+      width: 48px;
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .btn-comprar {
+      flex: 1;
+      justify-content: center;
+      padding: 16px;
+      font-size: .88rem;
+    }
+
+    .btn-wpp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 20px;
+      background: #25d366;
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: .82rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-wpp:hover { background: #1da852; transform: translateY(-2px); }
+
+    /* Garantias */
+    .garantias {
+      display: flex;
+      gap: 20px;
+      padding: 16px 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      flex-wrap: wrap;
+    }
+
+    .garantia-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .78rem;
+      color: var(--color-muted);
+    }
+
+    .garantia-item i { color: var(--color-orange); font-size: .95rem; }
+
+    /* Especificações */
+    .specs-title {
+      font-family: var(--font-heading);
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-orange);
+      margin-bottom: 10px;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem;
+    }
+
+    .specs-table tr:nth-child(odd) td { background: var(--color-card); }
+
+    .specs-table td {
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    .specs-table td:first-child {
+      color: var(--color-muted);
+      font-weight: 600;
+      width: 45%;
+    }
+
+    /* ── Seção de vídeo ── */
+    .video-section {
+      background: var(--color-surface);
+      padding: 60px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      max-width: 860px;
+      margin: 32px auto 0;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* ── Produtos relacionados ── */
+    .relacionados {
+      padding: 60px;
+      background: var(--color-bg);
+    }
+
+    .relacionados .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.92);
+      z-index: 8000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 20px; right: 26px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color var(--transition);
+    }
+
+    .lightbox__close:hover { color: var(--color-orange); }
+
+    /* ── Responsivo ── */
+    @media (max-width: 900px) {
+      .produto-layout { grid-template-columns: 1fr; }
+      .galeria { position: static; padding: 24px; }
+      .produto-info { padding: 30px 24px; }
+      .produto-nome { font-size: 1.8rem; }
+      .video-section { padding: 40px 24px; }
+      .relacionados { padding: 40px 24px; }
+      .relacionados .cards-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 500px) {
+      .relacionados .cards-grid { grid-template-columns: 1fr; }
+      .produto-acoes { flex-direction: column; align-items: stretch; }
+      .btn-comprar, .btn-wpp { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <!-- CARREGADO DINAMICAMENTE -->
+  <div id="pageContent">
+    <div style="text-align:center;padding:100px 20px;color:var(--color-muted);">
+      <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--color-orange);"></i>
+      <p style="margin-top:16px;font-family:var(--font-heading);letter-spacing:2px;text-transform:uppercase;">Carregando produto...</p>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightboxClose"><i class="fas fa-xmark"></i></button>
+    <img id="lightboxImg" src="" alt=""/>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../js/components.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/newsletter.js"></script>
+  <script src="../js/animations.js"></script>
+
+  <script>
+    /* ─── Pega o ID da URL ─── */
+    const params = new URLSearchParams(window.location.search);
+    const produtoId = parseInt(params.get('id'));
+    let quantidade = 1;
+
+    /* ─── Carregar produto ─── */
+    fetch('../data/produtos.json')
+      .then(r => r.json())
+      .then(todos => {
+        const produto = todos.find(p => p.id === produtoId);
+
+        if (!produto) {
+          document.getElementById('pageContent').innerHTML = `
+            <div style="text-align:center;padding:100px 20px;">
+              <i class="fas fa-triangle-exclamation" style="font-size:3rem;color:var(--color-orange);"></i>
+              <h2 style="font-family:var(--font-heading);margin:16px 0 8px;text-transform:uppercase;letter-spacing:2px;">Produto não encontrado</h2>
+              <a href="produtos.html" class="btn" style="margin-top:16px;">Ver todos os produtos</a>
+            </div>`;
+          return;
+        }
+
+        /* Atualizar título da aba */
+        document.title = `${produto.nome} – ArtMagma`;
+
+        /* Calcular parcelamento */
+        const parcela = (produto.preco / 6).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+        /* Badge de estoque */
+        const badgeClass = produto.estoque <= 5 ? 'galeria__badge galeria__badge--baixo' : 'galeria__badge';
+        const badgeText  = produto.estoque <= 5
+          ? `⚠ Últimas ${produto.estoque} unidades`
+          : `Em estoque`;
+
+        /* Miniaturas */
+        const imagens = produto.imagens || [produto.imagem];
+        const thumbsHTML = imagens.map((img, i) => `
+          <div class="galeria__thumb ${i === 0 ? 'active' : ''}" data-img="${img}" data-index="${i}">
+            <img src="${img}" alt="Foto ${i + 1} de ${produto.nome}" loading="lazy"/>
+          </div>
+        `).join('');
+
+        /* Especificações */
+        const specs = produto.especificacoes || {};
+        const specsHTML = Object.entries(specs).map(([k, v]) => `
+          <tr>
+            <td>${k}</td>
+            <td>${v}</td>
+          </tr>
+        `).join('');
+
+        /* Relacionados */
+        const relacionados = todos
+          .filter(p => p.id !== produto.id && p.categoria === produto.categoria)
+          .slice(0, 3);
+
+        const relacionadosHTML = relacionados.length ? `
+          <section class="relacionados">
+            <div class="section-header">
+              <h2 class="section-title">Você também pode gostar</h2>
+              <div class="section-icon"><i class="fas fa-hammer"></i></div>
+            </div>
+            <div class="cards-grid">
+              ${relacionados.map(p => `
+                <div class="card" onclick="window.location.href='produto.html?id=${p.id}'" style="cursor:pointer;">
+                  <div class="card__img">
+                    <img src="${p.imagem}" alt="${p.nome}" loading="lazy"/>
+                    <div class="card__overlay"><i class="fas fa-eye"></i> Visualizar</div>
+                  </div>
+                  <div class="card__body">
+                    <div class="card__name">${p.nome}</div>
+                    <div class="card__price">R$ ${p.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}</div>
+                    <button class="card__btn"
+                      data-add-cart
+                      data-id="${p.id}"
+                      data-nome="${p.nome}"
+                      data-preco="${p.preco}"
+                      data-imagem="${p.imagem}">
+                      <i class="fas fa-cart-plus"></i> Adicionar
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        ` : '';
+
+        /* Vídeo */
+        const videoHTML = produto.video ? `
+          <section class="video-section">
+            <div class="section-header">
+              <h2 class="section-title">Veja em Detalhes</h2>
+              <div class="section-icon"><i class="fas fa-circle-play"></i></div>
+            </div>
+            <div class="video-wrapper">
+              <iframe
+                src="${produto.video}"
+                title="Vídeo ${produto.nome}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </section>
+        ` : '';
+
+        /* Mensagem WhatsApp */
+        const wppMsg = encodeURIComponent(`Olá! Tenho interesse na ${produto.nome} (R$ ${produto.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}). Pode me dar mais informações?`);
+        const wppLink = `https://wa.me/5544998181001?text=${wppMsg}`;
+
+        /* ─── HTML principal ─── */
+        document.getElementById('pageContent').innerHTML = `
+
+          <!-- Breadcrumb -->
+          <div style="padding:16px 60px;background:var(--color-surface);border-bottom:1px solid var(--color-border);">
+            <div class="breadcrumb">
+              <a href="../index.html">Início</a>
+              <i class="fas fa-chevron-right"></i>
+              <a href="produtos.html">Produtos</a>
+              <i class="fas fa-chevron-right"></i>
+              <span style="color:#fff;">${produto.nome}</span>
+            </div>
+          </div>
+
+          <!-- Layout produto -->
+          <div class="produto-layout">
+
+            <!-- GALERIA -->
+            <div class="galeria">
+              <div class="galeria__principal" id="fotoAtiva">
+                <img src="${imagens[0]}" alt="${produto.nome}" id="fotoGrande"/>
+                <div class="${badgeClass}">${badgeText}</div>
+              </div>
+              <div class="galeria__thumbs">${thumbsHTML}</div>
+            </div>
+
+            <!-- INFORMAÇÕES -->
+            <div class="produto-info">
+              <div class="categoria-pill">${produto.categoria}</div>
+
+              <h1 class="produto-nome">${produto.nome}</h1>
+
+              <div class="divider"></div>
+
+              <div class="produto-preco">
+                <span class="produto-preco__valor">
+                  R$ ${produto.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}
+                </span>
+                <span class="produto-preco__parcelamento">
+                  ou 6x de R$ ${parcela} sem juros
+                </span>
+              </div>
+
+              <p class="produto-descricao">${produto.descricao_longa || produto.descricao}</p>
+
+              <!-- Quantidade + Adicionar -->
+              <div class="produto-acoes">
+                <div class="qty-control">
+                  <button id="qtyDec" aria-label="Diminuir">−</button>
+                  <span id="qtyDisplay">1</span>
+                  <button id="qtyInc" aria-label="Aumentar">+</button>
+                </div>
+                <button class="btn btn-comprar" id="btnAdicionar">
+                  <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                </button>
+                <a href="${wppLink}" target="_blank" class="btn-wpp">
+                  <i class="fab fa-whatsapp"></i> Pedir pelo WhatsApp
+                </a>
+              </div>
+
+              <!-- Garantias -->
+              <div class="garantias">
+                <div class="garantia-item">
+                  <i class="fas fa-shield-halved"></i>
+                  <span>Garantia de 1 ano</span>
+                </div>
+                <div class="garantia-item">
+                  <i class="fas fa-box"></i>
+                  <span>Frete para todo o Brasil</span>
+                </div>
+                <div class="garantia-item">
+                  <i class="fas fa-rotate-left"></i>
+                  <span>Troca em 7 dias</span>
+                </div>
+                <div class="garantia-item">
+                  <i class="fas fa-lock"></i>
+                  <span>Compra segura</span>
+                </div>
+              </div>
+
+              <!-- Especificações -->
+              ${specsHTML ? `
+                <div>
+                  <div class="specs-title"><i class="fas fa-list"></i> Especificações Técnicas</div>
+                  <table class="specs-table">${specsHTML}</table>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+
+          ${videoHTML}
+          ${relacionadosHTML}
+        `;
+
+        /* ─── Troca de foto pelas miniaturas ─── */
+        document.querySelectorAll('.galeria__thumb').forEach(thumb => {
+          thumb.addEventListener('click', () => {
+            document.getElementById('fotoGrande').src = thumb.dataset.img;
+            document.querySelectorAll('.galeria__thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+          });
+        });
+
+        /* ─── Lightbox ─── */
+        document.getElementById('fotoAtiva').addEventListener('click', () => {
+          document.getElementById('lightboxImg').src = document.getElementById('fotoGrande').src;
+          document.getElementById('lightbox').classList.add('open');
+        });
+
+        /* ─── Controle de quantidade ─── */
+        document.getElementById('qtyDec').addEventListener('click', () => {
+          if (quantidade > 1) { quantidade--; document.getElementById('qtyDisplay').textContent = quantidade; }
+        });
+        document.getElementById('qtyInc').addEventListener('click', () => {
+          if (quantidade < produto.estoque) { quantidade++; document.getElementById('qtyDisplay').textContent = quantidade; }
+        });
+
+        /* ─── Botão adicionar ao carrinho ─── */
+        document.getElementById('btnAdicionar').addEventListener('click', () => {
+          for (let i = 0; i < quantidade; i++) {
+            Cart.add({ id: produto.id, nome: produto.nome, preco: produto.preco, imagem: produto.imagem });
+          }
+        });
+
+      })
+      .catch(() => {
+        document.getElementById('pageContent').innerHTML =
+          '<div style="text-align:center;padding:100px 20px;color:var(--color-muted);">Erro ao carregar o produto.</div>';
+      });
+
+    /* ─── Fechar lightbox ─── */
+    document.getElementById('lightboxClose').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('open');
+    });
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>

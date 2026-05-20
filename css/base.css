@@ -1,0 +1,223 @@
+/* ============================================================
+   ArtMagma — css/base.css
+   Variáveis globais, reset e tipografia
+   ============================================================ */
+
+/* ---------- VARIÁVEIS ---------- */
+:root {
+  /* Cores */
+  --color-bg:        #1a0a00;
+  --color-surface:   #3b1000;
+  --color-card:      #2a0e00;
+  --color-footer:    #0f0400;
+  --color-orange:    #b84a1a;
+  --color-orange-dk: #9a3d12;
+  --color-cream:     #f5ecd7;
+  --color-muted:     #a08070;
+  --color-border:    #3b1000;
+  --color-success:   #7dcc7d;
+  --color-error:     #e57373;
+
+  /* Tipografia */
+  --font-heading: 'Oswald', sans-serif;
+  --font-body:    'Open Sans', sans-serif;
+
+  /* Espaçamentos */
+  --gap-xs:  8px;
+  --gap-sm:  16px;
+  --gap-md:  24px;
+  --gap-lg:  40px;
+  --gap-xl:  60px;
+
+  /* Bordas */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  /* Transições */
+  --transition: .25s ease;
+  --transition-slow: .45s ease;
+
+  /* Navbar height — usado em vários lugares */
+  --navbar-h: 64px;
+}
+
+/* ---------- RESET ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: #fff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol { list-style: none; }
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ---------- TIPOGRAFIA GLOBAL ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ---------- UTILITÁRIOS ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+.text-orange { color: var(--color-orange); }
+.text-muted  { color: var(--color-muted); }
+.text-center { text-align: center; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--gap-xl);
+}
+
+/* ---------- SECTION HEADER ---------- */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--gap-lg);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.section-title::before,
+.section-title::after {
+  content: '';
+  width: 60px;
+  height: 2px;
+  background: var(--color-orange);
+  display: block;
+  flex-shrink: 0;
+}
+
+.section-icon {
+  color: var(--color-orange);
+  font-size: 1.1rem;
+}
+
+/* ---------- BOTÕES ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  background: var(--color-orange);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: .82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), border-color var(--transition);
+}
+
+.btn:hover {
+  background: var(--color-orange-dk);
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+}
+
+.btn--outline:hover {
+  background: var(--color-orange);
+  color: #fff;
+}
+
+.btn--dark {
+  background: var(--color-surface);
+  border-color: var(--color-orange);
+  color: #1a0a00;
+}
+
+.btn--dark:hover {
+  background: var(--color-orange);
+  color: #fff;
+}
+
+/* ---------- TOAST ---------- */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--color-orange);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: .85rem;
+  letter-spacing: 1px;
+  padding: 14px 22px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 6px 20px rgba(0,0,0,.5);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity .3s, transform .3s;
+  max-width: 300px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- FADE-IN (animations.js) ---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

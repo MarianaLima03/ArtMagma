@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="ArtMagma – Facas artesanais forjadas à mão com aço de alta qualidade."/>
+  <title>ArtMagma – Facas Artesanais</title>
+
+  <!-- Fontes & Ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- CSS: base → componentes → página → responsivo -->
+  <link rel="stylesheet" href="css/base.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/home.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+
+  <!-- Navbar injetada via JS -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="inicio">
+    <div class="hero__content">
+      <p class="hero__sub">Exclusividade em Cada Detalhe</p>
+      <h1 class="hero__title">
+        FACAS QUE
+        <span>CONTAM HISTÓRIAS</span>
+      </h1>
+      <div class="hero__divider"></div>
+      <p class="hero__desc">
+        Cada faca é única, feita à mão com aço de qualidade e paixão em cada detalhe.
+      </p>
+      <a href="pages/produtos.html" class="btn">
+        <i class="fas fa-fire-flame-curved"></i> Ver Produtos
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════ DESTAQUES ═══════════ -->
+  <section class="destaques" id="destaques">
+    <div class="section-header">
+      <h2 class="section-title">Destaques</h2>
+      <div class="section-icon"><i class="fas fa-hammer"></i></div>
+    </div>
+
+    <div class="cards-grid" id="homeCards">
+      <!-- Renderizado por home-products.js -->
+      <p style="color:var(--color-muted);font-size:.85rem;">Carregando produtos...</p>
+    </div>
+
+    <div style="text-align:center;margin-top:32px;">
+      <a href="pages/produtos.html" class="btn btn--outline">Ver Todos os Produtos</a>
+    </div>
+  </section>
+
+  <!-- ═══════════ FEATURES BAR ═══════════ -->
+  <div class="features-bar">
+    <div class="feature">
+      <i class="fas fa-hammer"></i>
+      <span>Produzidas<br>à Mão</span>
+    </div>
+    <div class="feature">
+      <i class="fas fa-shield-halved"></i>
+      <span>Aço de Alta<br>Qualidade</span>
+    </div>
+    <div class="feature">
+      <i class="fas fa-gem"></i>
+      <span>Peças Únicas e<br>Exclusivas</span>
+    </div>
+    <div class="feature">
+      <i class="fas fa-award"></i>
+      <span>Acabamento<br>Premium</span>
+    </div>
+    <div class="feature">
+      <i class="fas fa-box"></i>
+      <span>Envio para Todo<br>o Brasil</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ SOBRE NÓS ═══════════ -->
+  <section class="sobre-home" id="sobre">
+    <div class="sobre-home__img" role="img" aria-label="Ferreiro trabalhando"></div>
+    <div class="sobre-home__content">
+      <span class="sobre-home__sub">Sobre Nós</span>
+      <h2 class="sobre-home__title">
+        TRADIÇÃO QUE
+        <span>PASSA DE GERAÇÃO</span>
+      </h2>
+      <p class="sobre-home__desc">
+        Há anos transformamos aço em arte. Na ArtMagma, nosso compromisso é entregar
+        qualidade, resistência e beleza em cada peça forjada.
+      </p>
+      <a href="pages/sobre.html" class="btn">Conheça Nossa História</a>
+      <div class="stamp">
+        <i class="fas fa-fire-flame-curved"></i>
+        <div>FORJADO<br>COM ORGULHO</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer injetado via JS -->
+  <div id="footer-placeholder"></div>
+
+  <!-- ═══════════ SCRIPTS ═══════════ -->
+  <!-- 1. Injetar navbar e footer -->
+  <script src="js/components.js"></script>
+  <!-- 2. Comportamento do navbar -->
+  <script src="js/navbar.js"></script>
+  <!-- 3. Carrinho -->
+  <script src="js/cart.js"></script>
+  <!-- 4. Newsletter -->
+  <script src="js/newsletter.js"></script>
+  <!-- 5. Animações -->
+  <script src="js/animations.js"></script>
+
+  <!-- 6. Carregar produtos destaque da home -->
+  <script>
+    fetch('./data/produtos.json')
+      .then(r => r.json())
+      .then(produtos => {
+        const destaques = produtos.filter(p => p.destaque);
+        const grid = document.getElementById('homeCards');
+
+        grid.innerHTML = destaques.map(p => `
+          <div class="card">
+            <div class="card__img" onclick="window.location.href='pages/produto.html?id=${p.id}'" style="cursor:pointer;">
+              <img src="${p.imagem}" alt="${p.nome}" loading="lazy"/>
+              <div class="card__overlay"><i class="fas fa-eye"></i> Visualizar</div>
+            </div>
+            <div class="card__body">
+              <div class="card__name" onclick="window.location.href='pages/produto.html?id=${p.id}'" style="cursor:pointer;">${p.nome}</div>
+              <div class="card__price">R$ ${p.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}</div>
+              <button class="card__btn"
+                data-add-cart
+                data-id="${p.id}"
+                data-nome="${p.nome}"
+                data-preco="${p.preco}"
+                data-imagem="${p.imagem}">
+                <i class="fas fa-cart-plus"></i> Adicionar
+              </button>
+            </div>
+          </div>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('homeCards').innerHTML =
+          '<p style="color:var(--color-muted)">Não foi possível carregar os produtos.</p>';
+      });
+  </script>
+
+</body>
+</html>

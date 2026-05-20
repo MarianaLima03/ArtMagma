@@ -1,0 +1,587 @@
+/* ============================================================
+   ArtMagma — css/components.css
+   Componentes reutilizáveis: navbar, footer, cards, formulários
+   ============================================================ */
+
+/* ─────────────────────────────────────────
+   NAVBAR
+───────────────────────────────────────── */
+#navbar {
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gap-xl);
+  height: var(--navbar-h);
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  border-bottom: 1px solid var(--color-border);
+  transition: box-shadow var(--transition);
+}
+
+#navbar.scrolled {
+  box-shadow: 0 4px 24px rgba(0,0,0,.7);
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-logo i {
+  font-size: 1.6rem;
+  color: var(--color-orange);
+}
+
+.nav-logo .logo-art  { color: #fff; }
+.nav-logo .logo-magma { color: var(--color-orange); }
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 36px;
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: .88rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color var(--transition);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--color-orange);
+  transition: width var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--color-orange); }
+
+.nav-links a.active::after,
+.nav-links a:hover::after { width: 100%; }
+
+/* Ícones direita */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.nav-icons i:hover { color: var(--color-orange); }
+
+.cart-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px; right: -8px;
+  background: var(--color-orange);
+  color: #fff;
+  font-size: .6rem;
+  font-weight: 700;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: transform .2s;
+}
+
+.cart-badge.bump { transform: scale(1.4); }
+
+/* Hamburguer */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px; height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Menu Mobile */
+.mobile-menu {
+  display: none;
+  background: var(--color-surface);
+  position: fixed;
+  top: var(--navbar-h); left: 0; right: 0;
+  z-index: 490;
+  border-bottom: 1px solid var(--color-border);
+  transform: translateY(-110%);
+  transition: transform var(--transition);
+}
+
+.mobile-menu.open { transform: translateY(0); }
+
+.mobile-menu li a {
+  display: block;
+  padding: 14px 30px;
+  font-family: var(--font-heading);
+  font-size: .9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color var(--transition), background var(--transition);
+}
+
+.mobile-menu li a:hover,
+.mobile-menu li a.active {
+  color: var(--color-orange);
+  background: rgba(255,255,255,.04);
+}
+
+/* ─────────────────────────────────────────
+   CARD DE PRODUTO
+───────────────────────────────────────── */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0,0,0,.55);
+}
+
+.card__img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #3a1500;
+  flex-shrink: 0;
+}
+
+.card__img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.card:hover .card__img img { transform: scale(1.07); }
+
+.card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(184,74,26,.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: .82rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.card:hover .card__overlay { opacity: 1; }
+
+.card__body {
+  padding: 18px 16px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card__name {
+  font-family: var(--font-heading);
+  font-size: .88rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.card__desc {
+  font-size: .78rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.card__price {
+  font-family: var(--font-heading);
+  color: var(--color-orange);
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
+
+.card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #555;
+  padding-bottom: 2px;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #aaa;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+  width: fit-content;
+}
+
+.card__btn:hover {
+  color: var(--color-orange);
+  border-color: var(--color-orange);
+}
+
+/* ─────────────────────────────────────────
+   FEATURES BAR
+───────────────────────────────────────── */
+.features-bar {
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-around;
+  padding: 28px var(--gap-xl);
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  flex: 1;
+  padding: 0 var(--gap-sm);
+  border-right: 1px solid var(--color-border);
+  transition: transform var(--transition);
+}
+
+.feature:hover { transform: translateY(-3px); }
+.feature:last-child { border-right: none; }
+
+.feature i {
+  font-size: 1.8rem;
+  color: var(--color-orange);
+}
+
+.feature span {
+  font-family: var(--font-heading);
+  font-size: .72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────
+   PAGE HERO (páginas internas)
+───────────────────────────────────────── */
+.page-hero {
+  background: var(--color-surface);
+  padding: 60px var(--gap-xl);
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-hero h1 {
+  font-size: 2.5rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.page-hero h1 span { color: var(--color-orange); }
+
+.page-hero p {
+  color: var(--color-muted);
+  font-size: .92rem;
+}
+
+/* ─────────────────────────────────────────
+   FORMULÁRIOS GENÉRICOS
+───────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: var(--gap-sm);
+}
+
+.form-group label {
+  font-family: var(--font-heading);
+  font-size: .78rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.form-control {
+  padding: 12px 14px;
+  background: #2a1000;
+  border: 1px solid #4a2010;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.form-control:focus { border-color: var(--color-orange); }
+.form-control::placeholder { color: #6a4030; }
+
+textarea.form-control { resize: vertical; min-height: 120px; }
+
+/* Newsletter inline */
+.newsletter-form {
+  display: flex;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 10px 12px;
+  background: #2a1000;
+  border: 1px solid #4a2010;
+  border-right: none;
+  color: #fff;
+  font-size: .83rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.newsletter-form input:focus { border-color: var(--color-orange); }
+.newsletter-form input::placeholder { color: #6a4030; }
+
+.newsletter-form button {
+  background: var(--color-orange);
+  border: none;
+  padding: 0 16px;
+  color: #fff;
+  cursor: pointer;
+  font-size: .9rem;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+
+.newsletter-form button:hover { background: var(--color-orange-dk); }
+
+.form-feedback {
+  font-size: .78rem;
+  margin-top: 6px;
+  min-height: 18px;
+}
+
+.form-feedback--ok  { color: var(--color-success); }
+.form-feedback--err { color: var(--color-error); }
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+#footer {
+  background: var(--color-footer);
+  padding: 50px var(--gap-xl) 20px;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.4fr 1.4fr;
+  gap: var(--gap-lg);
+  margin-bottom: var(--gap-lg);
+}
+
+.footer__brand .nav-logo { margin-bottom: 12px; }
+
+.footer__brand p {
+  font-size: .83rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  max-width: 210px;
+  margin-bottom: var(--gap-sm);
+}
+
+.footer__socials {
+  display: flex;
+  gap: 14px;
+  font-size: 1.2rem;
+}
+
+.footer__socials a {
+  transition: color var(--transition), transform var(--transition);
+}
+
+.footer__socials a:hover {
+  color: var(--color-orange);
+  transform: translateY(-3px);
+}
+
+.footer__col h4 {
+  font-family: var(--font-heading);
+  font-size: .82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: var(--gap-sm);
+}
+
+.footer__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.footer__col ul a {
+  font-size: .83rem;
+  color: var(--color-muted);
+  transition: color var(--transition), padding-left var(--transition);
+}
+
+.footer__col ul a:hover {
+  color: var(--color-orange);
+  padding-left: 5px;
+}
+
+.footer__col p {
+  font-size: .83rem;
+  color: var(--color-muted);
+  line-height: 1.9;
+}
+
+.footer__newsletter-desc {
+  font-size: .83rem;
+  color: var(--color-muted);
+  margin-bottom: 10px;
+}
+
+/* ─────────────────────────────────────────
+   BOTÃO FLUTUANTE WHATSAPP
+───────────────────────────────────────── */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9000;
+
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  font-size: 1.75rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 18px rgba(37,211,102,.5);
+  transition: transform var(--transition), box-shadow var(--transition);
+
+  /* Animação de pulso suave para chamar atenção */
+  animation: whatsapp-pulse 2.8s ease-in-out infinite;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 26px rgba(37,211,102,.7);
+  animation: none; /* para o pulso no hover */
+}
+
+/* Tooltip que aparece ao passar o mouse */
+.whatsapp-btn__tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+
+  background: #1a1a1a;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: .72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+
+/* Seta do tooltip */
+.whatsapp-btn__tooltip::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: #1a1a1a;
+}
+
+.whatsapp-btn:hover .whatsapp-btn__tooltip { opacity: 1; }
+
+/* Animação de pulso */
+@keyframes whatsapp-pulse {
+  0%, 100% { box-shadow: 0 4px 18px rgba(37,211,102,.5); }
+  50%       { box-shadow: 0 4px 28px rgba(37,211,102,.85), 0 0 0 10px rgba(37,211,102,.1); }
+}
+
+/* No mobile, esconde o tooltip (não tem hover no touch) */
+@media (max-width: 768px) {
+  .whatsapp-btn { bottom: 20px; right: 20px; width: 52px; height: 52px; font-size: 1.6rem; }
+  .whatsapp-btn__tooltip { display: none; }
+}
+
+/* ─────────────────────────────────────────
+   FOOTER BOTTOM (mantido abaixo)
+───────────────────────────────────────── */
+.footer__bottom {
+  border-top: 1px solid #2a1000;
+  padding-top: 20px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: .72rem;
+  letter-spacing: 1.5px;
+  color: #6a4030;
+  text-transform: uppercase;
+}

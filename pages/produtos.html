@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="ArtMagma – Todos os nossos produtos artesanais."/>
+  <title>Produtos – ArtMagma</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/base.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/produtos.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <h1>Nossos <span>Produtos</span></h1>
+    <p>Peças únicas, forjadas à mão com aço de alta qualidade</p>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="filtros">
+    <span class="filtros__label">Filtrar:</span>
+    <div class="filtros__btns">
+      <button class="filtro-btn active" data-filtro="todos">Todos</button>
+      <button class="filtro-btn" data-filtro="cozinha">Cozinha</button>
+      <button class="filtro-btn" data-filtro="churrasco">Churrasco</button>
+      <button class="filtro-btn" data-filtro="caca">Caça</button>
+      <button class="filtro-btn" data-filtro="utilitaria">Utilitária</button>
+    </div>
+  </div>
+
+  <!-- GRID DE PRODUTOS -->
+  <section class="produtos-section">
+    <p class="produtos-info" id="produtosInfo">Carregando...</p>
+    <div class="produtos-grid" id="produtosGrid">
+      <!-- Renderizado via JS -->
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/components.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/newsletter.js"></script>
+  <script src="../js/animations.js"></script>
+
+  <script>
+    let allProdutos = [];
+    let filtroAtivo = 'todos';
+
+    const grid = document.getElementById('produtosGrid');
+    const info = document.getElementById('produtosInfo');
+
+    /* Renderizar lista */
+    function render() {
+      let lista = filtroAtivo === 'todos'
+        ? allProdutos
+        : allProdutos.filter(p => p.categoria === filtroAtivo);
+
+      info.textContent = `${lista.length} produto${lista.length !== 1 ? 's' : ''} encontrado${lista.length !== 1 ? 's' : ''}`;
+
+      if (lista.length === 0) {
+        grid.innerHTML = `
+          <div class="produtos-empty">
+            <i class="fas fa-search"></i>
+            Nenhum produto encontrado
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = lista.map(p => `
+        <div class="card">
+          <div class="card__img">
+            <img src="${p.imagem}" alt="${p.nome}" loading="lazy"/>
+            <a class="card__overlay" href="produto.html?id=${p.id}"><i class="fas fa-eye"></i> Visualizar</a>
+          </div>
+          <div class="card__body">
+            <div class="card__name">${p.nome}</div>
+            <div class="card__desc">${p.descricao}</div>
+            <div class="card__price">R$ ${p.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}</div>
+            <button class="card__btn"
+              data-add-cart
+              data-id="${p.id}"
+              data-nome="${p.nome}"
+              data-preco="${p.preco}"
+              data-imagem="${p.imagem}">
+              <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* Filtros por categoria */
+    document.querySelectorAll('.filtro-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filtroAtivo = btn.dataset.filtro;
+        render();
+      });
+    });
+
+    /* Carregar JSON */
+    fetch('../data/produtos.json')
+      .then(r => r.json())
+      .then(data => {
+        allProdutos = data;
+        render();
+      })
+      .catch(() => {A
+        grid.innerHTML = '<div class="produtos-empty"><i class="fas fa-triangle-exclamation"></i> Erro ao carregar produtos.</div>';
+      });
+  </script>
+
+</body>
+</html>

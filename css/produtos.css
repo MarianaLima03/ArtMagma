@@ -1,0 +1,301 @@
+/* ============================================================
+   ArtMagma — css/produtos.css
+   Estilos exclusivos da página de produtos
+   ============================================================ */
+
+/* ─────────────────────────────────────────
+   FILTROS
+───────────────────────────────────────── */
+.filtros {
+  background: var(--color-surface);
+  padding: var(--gap-md) var(--gap-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-md);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.filtros__label {
+  font-family: var(--font-heading);
+  font-size: .78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.filtros__btns {
+  display: flex;
+  gap: var(--gap-xs);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filtro-btn {
+  padding: 7px 16px;
+  background: transparent;
+  border: 1px solid #555;
+  border-radius: var(--radius-sm);
+  color: #aaa;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.filtro-btn:hover,
+.filtro-btn.active {
+  background: var(--color-orange);
+  border-color: var(--color-orange);
+  color: #fff;
+}
+
+/* Busca */
+.filtros__search {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.filtros__search input {
+  padding: 8px 14px;
+  background: #2a1000;
+  border: 1px solid #4a2010;
+  border-right: none;
+  color: #fff;
+  font-size: .83rem;
+  outline: none;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  width: 200px;
+  transition: border-color var(--transition);
+}
+
+.filtros__search input:focus { border-color: var(--color-orange); }
+.filtros__search input::placeholder { color: #6a4030; }
+
+.filtros__search button {
+  padding: 8px 14px;
+  background: var(--color-orange);
+  border: 1px solid var(--color-orange);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition: background var(--transition);
+}
+
+.filtros__search button:hover { background: var(--color-orange-dk); }
+
+/* ─────────────────────────────────────────
+   GRID DE PRODUTOS
+───────────────────────────────────────── */
+.produtos-section {
+  padding: var(--gap-xl);
+}
+
+.produtos-info {
+  font-family: var(--font-heading);
+  font-size: .78rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--gap-md);
+}
+
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+}
+
+/* Estado vazio */
+.produtos-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 0;
+  color: var(--color-muted);
+  font-family: var(--font-heading);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.produtos-empty i {
+  font-size: 3rem;
+  color: var(--color-border);
+  margin-bottom: var(--gap-sm);
+  display: block;
+}
+
+/* ─────────────────────────────────────────
+   CHECKOUT PAGE
+───────────────────────────────────────── */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--gap-lg);
+  padding: var(--gap-xl);
+  align-items: start;
+}
+
+.checkout-form h2,
+.checkout-summary h2 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: var(--gap-md);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-orange);
+}
+
+.checkout-steps {
+  display: flex;
+  gap: var(--gap-xs);
+  margin-bottom: var(--gap-lg);
+}
+
+.step {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: .72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  position: relative;
+}
+
+.step.active {
+  background: var(--color-orange);
+  border-color: var(--color-orange);
+  color: #fff;
+}
+
+.step.done {
+  background: var(--color-surface);
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+}
+
+/* Resumo do carrinho */
+.checkout-summary {
+  background: var(--color-card);
+  border-radius: var(--radius-sm);
+  padding: var(--gap-md);
+  position: sticky;
+  top: calc(var(--navbar-h) + 20px);
+}
+
+.cart-items-list { margin-bottom: var(--gap-md); }
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-item img {
+  width: 60px; height: 60px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.cart-item__info { flex: 1; }
+
+.cart-item__name {
+  font-family: var(--font-heading);
+  font-size: .8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.cart-item__price {
+  color: var(--color-orange);
+  font-size: .85rem;
+}
+
+.cart-item__qty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .8rem;
+}
+
+.cart-item__qty button {
+  background: var(--color-surface);
+  border: none;
+  color: #fff;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: .9rem;
+  transition: background var(--transition);
+}
+
+.cart-item__qty button:hover { background: var(--color-orange); }
+
+.cart-item__remove {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  font-size: .9rem;
+  transition: color var(--transition);
+}
+
+.cart-item__remove:hover { color: var(--color-error); }
+
+.cart-total {
+  padding-top: var(--gap-sm);
+  border-top: 2px solid var(--color-orange);
+}
+
+.cart-total__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  color: var(--color-muted);
+  margin-bottom: 6px;
+}
+
+.cart-total__row--final {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-top: var(--gap-xs);
+}
+
+.cart-total__row--final span:last-child { color: var(--color-orange); }
+
+/* Badge pagamento futuro */
+.payment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-orange);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-orange);
+  margin-bottom: var(--gap-md);
+  width: 100%;
+  justify-content: center;
+}

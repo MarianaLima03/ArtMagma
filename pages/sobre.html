@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sobre Nós – ArtMagma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/base.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+
+  <style>
+    /* Estilos específicos desta página */
+    .sobre-page {
+      display: flex;
+      align-items: stretch;
+      min-height: 480px;
+    }
+
+    .sobre-page__img {
+      flex: 1;
+      background:
+        url('https://images.unsplash.com/photo-1504817343863-5092a923803e?w=900&q=80')
+        center / cover no-repeat;
+      min-height: 340px;
+    }
+
+    .sobre-page__content {
+      flex: 1;
+      background: var(--color-cream);
+      color: #1a0a00;
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .sobre-page__content h2 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .sobre-page__content h2 span { color: var(--color-orange); display: block; }
+    .sobre-page__content p { font-size: .9rem; line-height: 1.8; color: #4a3020; max-width: 440px; }
+
+    /* Timeline */
+    .timeline { padding: 60px var(--gap-xl); }
+    .timeline h2 { margin-bottom: 40px; }
+    .timeline-list { position: relative; padding-left: 40px; }
+    .timeline-list::before {
+      content: '';
+      position: absolute;
+      left: 14px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 36px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -32px; top: 6px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--color-orange);
+      border: 3px solid var(--color-bg);
+    }
+    .timeline-year {
+      font-family: var(--font-heading);
+      font-size: .78rem;
+      letter-spacing: 2px;
+      color: var(--color-orange);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .timeline-desc {
+      font-size: .88rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    /* Valores */
+    .valores { background: var(--color-surface); padding: 60px var(--gap-xl); }
+    .valores-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap-md);
+      margin-top: 40px;
+    }
+    .valor-card {
+      background: var(--color-card);
+      padding: var(--gap-md);
+      border-radius: var(--radius-sm);
+      text-align: center;
+      border-top: 3px solid var(--color-orange);
+    }
+    .valor-card i { font-size: 2rem; color: var(--color-orange); margin-bottom: 12px; display: block; }
+    .valor-card h3 {
+      font-family: var(--font-heading);
+      font-size: .88rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .valor-card p { font-size: .82rem; color: var(--color-muted); line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .valores-grid { grid-template-columns: 1fr; }
+      .sobre-page__content { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <div class="page-hero">
+    <h1>Sobre <span>Nós</span></h1>
+    <p>A história por trás de cada lâmina</p>
+  </div>
+
+  <!-- BLOCO PRINCIPAL -->
+  <section class="sobre-page">
+    <div class="sobre-page__img" role="img" aria-label="Ferreiro trabalhando na forja"></div>
+    <div class="sobre-page__content">
+      <h2>TRADIÇÃO QUE<span>PASSA DE GERAÇÃO</span></h2>
+      <p>
+        A ArtMagma nasceu da paixão pela arte da forja. Somos um ateliê familiar,
+        fundado por mestres ferreiros que aprenderam o ofício com seus pais e avós.
+      </p>
+      <p>
+        Cada faca que sai de nossas mãos carrega horas de dedicação, calor da forja
+        e o orgulho de um trabalho bem feito. Usamos aço carbono de alta qualidade,
+        temperado à mão para garantir fio duradouro e resistência excepcional.
+      </p>
+      <a href="contato.html" class="btn" style="margin-top:8px;">Entre em Contato</a>
+    </div>
+  </section>
+
+  <!-- NOSSA HISTÓRIA -->
+  <section class="timeline container" style="max-width:100%;">
+    <div class="section-header">
+      <h2 class="section-title">Nossa História</h2>
+      <div class="section-icon"><i class="fas fa-fire-flame-curved"></i></div>
+    </div>
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div class="timeline-year">2003</div>
+        <div class="timeline-title">O Início</div>
+        <p class="timeline-desc">O mestre ferreiro João Magalhães começa a forjar facas artesanais em sua oficina no interior de São Paulo, inspirado pelo ofício do avô.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2010</div>
+        <div class="timeline-title">Primeiro Prêmio</div>
+        <p class="timeline-desc">A ArtMagma recebe seu primeiro reconhecimento nacional na Feira do Artesanato Brasileiro, consagrando a qualidade de suas peças.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2018</div>
+        <div class="timeline-title">Expansão</div>
+        <p class="timeline-desc">Com a segunda geração entrando no negócio, ampliamos o ateliê e começamos a exportar para colecionadores na Europa.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-title">ArtMagma Online</div>
+        <p class="timeline-desc">Lançamos nossa loja virtual para levar nossas criações para todo o Brasil, mantendo o mesmo cuidado artesanal de sempre.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORES -->
+  <section class="valores">
+    <div class="section-header">
+      <h2 class="section-title">Nossos Valores</h2>
+      <div class="section-icon"><i class="fas fa-hammer"></i></div>
+    </div>
+    <div class="valores-grid">
+      <div class="valor-card">
+        <i class="fas fa-fire-flame-curved"></i>
+        <h3>Paixão</h3>
+        <p>Cada peça é feita com amor pelo ofício. A forja não é só trabalho — é arte.</p>
+      </div>
+      <div class="valor-card">
+        <i class="fas fa-gem"></i>
+        <h3>Qualidade</h3>
+        <p>Usamos apenas matérias-primas selecionadas. Sem atalhos, sem compromissos.</p>
+      </div>
+      <div class="valor-card">
+        <i class="fas fa-handshake"></i>
+        <h3>Tradição</h3>
+        <p>Técnicas passadas de geração a geração, adaptadas com respeito à história.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../js/components.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/newsletter.js"></script>
+  <script src="../js/animations.js"></script>
+
+</body>
+</html>

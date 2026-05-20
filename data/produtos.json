@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "nome": "Faca Chef",
+    "descricao": "Ideal para cortes precisos no dia a dia. Lâmina forjada em aço carbono de alta dureza com fio excepcional.",
+    "descricao_longa": "A Faca Chef ArtMagma é a escolha perfeita para quem leva a sério a culinária. Cada unidade é forjada individualmente em aço carbono 1095, temperada à mão e afiada com pedra de granulação progressiva até atingir um ângulo de 15° por lado — garantindo um fio que dura e é fácil de manter. O cabo é confeccionado em madeira de nogueira brasileira com três rebites em aço inoxidável, proporcionando equilíbrio e conforto mesmo em longas horas de preparo.",
+    "preco": 299.90,
+    "categoria": "cozinha",
+    "imagem": "https://images.unsplash.com/photo-1566454419290-57a64afe30ac?w=800&q=80",
+    "imagens": [
+      "https://images.unsplash.com/photo-1566454419290-57a64afe30ac?w=800&q=80",
+      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80",
+      "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80"
+    ],
+    "video": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "especificacoes": {
+      "Aço": "Carbono 1095",
+      "Comprimento da lâmina": "20 cm",
+      "Espessura": "3,5 mm",
+      "Cabo": "Nogueira brasileira",
+      "Acabamento": "Polido à mão",
+      "Peso": "210 g"
+    },
+    "destaque": true,
+    "estoque": 12
+  },
+  {
+    "id": 2,
+    "nome": "Faca de Caça",
+    "descricao": "Robusta e resistente, forjada para trabalho pesado em campo. Cabo em madeira nobre com acabamento em couro.",
+    "descricao_longa": "Desenvolvida para os momentos mais exigentes em campo, a Faca de Caça ArtMagma combina robustez extrema com elegância artesanal. Forjada em aço inoxidável D2 de alta resistência à corrosão, ela suporta as condições mais adversas sem perder o fio. O cabo em madeira de jacarandá com capa de couro curtido oferece aderência segura mesmo com as mãos molhadas ou enluvadas. Acompanha bainha em couro genuíno costurada à mão.",
+    "preco": 279.90,
+    "categoria": "caca",
+    "imagem": "https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?w=800&q=80",
+    "imagens": [
+      "https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?w=800&q=80",
+      "https://images.unsplash.com/photo-1595981234058-a9302fb97229?w=800&q=80",
+      "https://images.unsplash.com/photo-1504817343863-5092a923803e?w=800&q=80"
+    ],
+    "video": "",
+    "especificacoes": {
+      "Aço": "Inox D2",
+      "Comprimento da lâmina": "18 cm",
+      "Espessura": "4 mm",
+      "Cabo": "Jacarandá + couro",
+      "Acabamento": "Fosco",
+      "Peso": "280 g"
+    },
+    "destaque": true,
+    "estoque": 8
+  },
+  {
+    "id": 3,
+    "nome": "Faca para Churrasco",
+    "descricao": "Desenvolvida para o churrasco perfeito. Lâmina longa e fina, equilibrada para cortes limpos na carne.",
+    "descricao_longa": "Nenhuma peça de carne merece menos do que a melhor faca. A Faca para Churrasco ArtMagma tem lâmina longa de 25 cm em aço inoxidável 440C, com perfil fino que desliza pela carne sem rasgar as fibras. O equilíbrio entre lâmina e cabo foi cuidadosamente estudado para que o movimento de corte seja fluido e sem esforço. Acabamento em espelho na lâmina e cabo em madeira de ipê com detalhes em latão.",
+    "preco": 249.90,
+    "categoria": "churrasco",
+    "imagem": "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80",
+    "imagens": [
+      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80",
+      "https://images.unsplash.com/photo-1566454419290-57a64afe30ac?w=800&q=80",
+      "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80"
+    ],
+    "video": "",
+    "especificacoes": {
+      "Aço": "Inox 440C",
+      "Comprimento da lâmina": "25 cm",
+      "Espessura": "2,5 mm",
+      "Cabo": "Ipê com detalhes em latão",
+      "Acabamento": "Espelho",
+      "Peso": "230 g"
+    },
+    "destaque": true,
+    "estoque": 15
+  },
+  {
+    "id": 4,
+    "nome": "Faca Utilitária",
+    "descricao": "Versátil e compacta. Perfeita para o uso cotidiano tanto na cozinha quanto em atividades ao ar livre.",
+    "descricao_longa": "A menor da família ArtMagma, mas não menos caprichada. A Faca Utilitária resolve desde descascar frutas até trabalhos finos em acampamentos. Lâmina em aço carbono 1070 com 12 cm, leve e manobrável. Cabo em resina com fibra de madeira, resistente à umidade e ao calor. Uma companheira fiel para o dia a dia.",
+    "preco": 199.90,
+    "categoria": "utilitaria",
+    "imagem": "https://images.unsplash.com/photo-1504817343863-5092a923803e?w=800&q=80",
+    "imagens": [
+      "https://images.unsplash.com/photo-1504817343863-5092a923803e?w=800&q=80",
+      "https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?w=800&q=80",
+      "https://images.unsplash.com/photo-1595981234058-a9302fb97229?w=800&q=80"
+    ],
+    "video": "",
+    "especificacoes": {
+      "Aço": "Carbono 1070",
+      "Comprimento da lâmina": "12 cm",
+      "Espessura": "2,8 mm",
+      "Cabo": "Resina com fibra de madeira",
+      "Acabamento": "Acetinado",
+      "Peso": "140 g"
+    },
+    "destaque": true,
+    "estoque": 20
+  },
+  {
+    "id": 5,
+    "nome": "Faca Santoku",
+    "descricao": "Inspirada na culinária japonesa, ideal para cortar, picar e fatiar. Lâmina com alvéolos anti-aderentes.",
+    "descricao_longa": "A Santoku é a faca mais versátil da culinária japonesa — e a ArtMagma a reinterpretou com técnicas brasileiras de forja. Lâmina em aço 67 camadas (damasco), com os característicos alvéolos que evitam que os alimentos grudem. Cabo octogonal em madeira de amboina com anel em bronze. Uma peça que é também uma obra de arte.",
+    "preco": 349.90,
+    "categoria": "cozinha",
+    "imagem": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
+    "imagens": [
+      "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
+      "https://images.unsplash.com/photo-1566454419290-57a64afe30ac?w=800&q=80",
+      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80"
+    ],
+    "video": "",
+    "especificacoes": {
+      "Aço": "Damasco 67 camadas",
+      "Comprimento da lâmina": "17 cm",
+      "Espessura": "2 mm",
+      "Cabo": "Amboina + anel de bronze",
+      "Acabamento": "Damasco polido",
+      "Peso": "185 g"
+    },
+    "destaque": false,
+    "estoque": 6
+  },
+  {
+    "id": 6,
+    "nome": "Faca Cimitarra",
+    "descricao": "Grande e imponente, a escolha certa para açougue e cortes de peças inteiras. Forjada sob medida.",
+    "descricao_longa": "Quando o trabalho é pesado, a Cimitarra ArtMagma está à altura. Com lâmina curva de 30 cm em aço carbono 5160 (mola), ela concentra toda a força do golpe no fio, tornando o corte de peças grandes um trabalho preciso e eficiente. Muito usada por açougueiros e churrasceiros profissionais. Cabo em madeira de garapeira com protetor em aço forjado.",
+    "preco": 389.90,
+    "categoria": "churrasco",
+    "imagem": "https://images.unsplash.com/photo-1595981234058-a9302fb97229?w=800&q=80",
+    "imagens": [
+      "https://images.unsplash.com/photo-1595981234058-a9302fb97229?w=800&q=80",
+      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80",
+      "https://images.unsplash.com/photo-1504817343863-5092a923803e?w=800&q=80"
+    ],
+    "video": "",
+    "especificacoes": {
+      "Aço": "Carbono 5160",
+      "Comprimento da lâmina": "30 cm",
+      "Espessura": "5 mm",
+      "Cabo": "Garapeira + protetor forjado",
+      "Acabamento": "Fosco com cordão",
+      "Peso": "420 g"
+    },
+    "destaque": false,
+    "estoque": 4
+  }
+]
