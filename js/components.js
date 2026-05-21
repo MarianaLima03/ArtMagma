@@ -67,11 +67,11 @@
               <i class="fas fa-fire-flame-curved"></i>
               <div><span class="logo-art">ART</span><span class="logo-magma">MAGMA</span></div>
             </a>
-            <p>Facas artesanais forjadas à mão com qualidade e tradição desde a primeira chama.</p>
+            <p>Lâminas de qualidade para quem exige um bom corte.</p>
             <div class="footer__socials">
-              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+              <a href="https://www.instagram.com/maxwellml171/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.facebook.com/profile.php?id=61580052863996&locale=pt_BR" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://wa.me/5544998181001?text=Olá!%20Tenho%20interesse%20em%20uma%20faca%20da%20ArtMagma.%20🔥" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
           </div>
 
@@ -87,8 +87,8 @@
           <div class="footer__col">
             <h4>Atendimento</h4>
             <p>
-              (14) 99888-1234<br>
-              contato@artmagma.com.br<br>
+              (44) 99818-1001<br>
+              maxwell@magmatecnologia.com<br>
               Seg - Sex: 08h às 18h<br>
               Sáb: 08h às 12h
             </p>
@@ -106,7 +106,7 @@
 
         </div>
         <div class="footer__bottom">
-          © 2024 ArtMagma – Todos os Direitos Reservados
+          © 2026 ArtMagma • Feito para quem valoriza um bom corte.
         </div>
       </footer>
 
