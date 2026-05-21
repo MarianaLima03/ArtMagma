@@ -480,24 +480,6 @@
           </section>
         ` : '';
 
-        /* Vídeo */
-        const videoHTML = produto.video ? `
-          <section class="video-section">
-            <div class="section-header">
-              <h2 class="section-title">Veja em Detalhes</h2>
-              <div class="section-icon"><i class="fas fa-circle-play"></i></div>
-            </div>
-            <div class="video-wrapper">
-              <iframe
-                src="${produto.video}"
-                title="Vídeo ${produto.nome}"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </section>
-        ` : '';
-
         /* Mensagem WhatsApp */
         const wppMsg = encodeURIComponent(`Olá! Tenho interesse na ${produto.nome} (R$ ${produto.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}). Pode me dar mais informações?`);
         const wppLink = `https://wa.me/5544998181001?text=${wppMsg}`;
